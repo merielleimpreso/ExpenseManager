@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/aeustech/Documents/UPV/CMSC197/Class Activities/Gits/ExpenseManager/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/aeustech/Documents/UPV/CMSC197/Class Activities/Gits/ExpenseManager/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/aeustech/Documents/UPV/CMSC197/Class Activities/ExpenseManager/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/aeustech/Documents/UPV/CMSC197/Class Activities/ExpenseManager/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    }
+]
