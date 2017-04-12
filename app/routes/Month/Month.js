@@ -54,7 +54,7 @@ export default class Month extends Component {
     return expensesNew;
   }
 
-  // Called when a row is clicked
+  // Called when a row is clicked.
   // Get the date selected and create a new date format with that.
   // Then, get the expenses in that particular date by passing a Date object in Expenses.getExpenses.
   onPressRow(data) {
