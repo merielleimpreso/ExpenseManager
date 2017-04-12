@@ -1,0 +1,28 @@
+The modules folder contains created modules used in render of files in routes.
+
+Header
+  - used in Today.js, Category.js, CategoryDetails,js, Month.js, MonthDetails.js
+  - display of date and amount on top
+  - props:
+    * amount - string of amount
+    * date - date (i.e. today's date or current month)
+
+List
+  - used in Category.js, Month.js, SelectCategory.js
+  - display a simple list with row data of title and details (if present)
+  - props:
+    * items - an array of title-details objects
+
+ListWithSection
+  - display a list with rows and sections of expenses
+  - props:
+    * expenses - an array of expenses with category
+
+NavigationBar
+  - display the bar on top of each page
+  - props:
+    * title - string title of a page
+    * renderHeaderAction - if present, a view that displays the action button
+
+TabBar
+  - file grabbed from react-native-scrollable-tab-view

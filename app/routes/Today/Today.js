@@ -19,7 +19,7 @@ export default class Today extends Component {
     return (
       <View>
         <Header amount={amount} date={dateToday} />
-        <ListWithSection expenses={expensesToday} listType='today'/>
+        <ListWithSection expenses={expensesToday} />
       </View>
     );
   }

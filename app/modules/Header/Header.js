@@ -11,7 +11,7 @@ const Header = (props) => {
   let { amount, date } = props;
   return (
     <View style={styles.main}>
-      {(date) ? <Text style={styles.date}>{date}</Text> : null } 
+      {(date) ? <Text style={styles.date}>{date}</Text> : null }
       <Text style={styles.amount}>{amount}</Text>
     </View>
   );
