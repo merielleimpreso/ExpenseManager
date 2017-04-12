@@ -1,1 +1,6 @@
 The description folder contains the ExpenseManager main file.
+
+ExpenseManager.js
+  - main file for this app
+  - used in index.ios.js and index.android.js
+  - contains the navigator for page transitions

@@ -1,7 +1,3 @@
-// ExpenseManager.js
-// main file for this app
-// used in index.ios.js and index.android.js
-
 import React, { Component } from 'react';
 import {
   BackAndroid,
