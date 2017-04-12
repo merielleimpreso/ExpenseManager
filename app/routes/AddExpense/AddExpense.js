@@ -41,6 +41,7 @@ export default class AddExpense extends Component {
             </View>
           </TouchableWithoutFeedback>
           <TextInput
+            ref="amount"
             placeholder="Amount"
             onChangeText={(amount) => {
               this.setState({amount: amount})
@@ -48,8 +49,10 @@ export default class AddExpense extends Component {
             selectionColor='#ccc'
             keyboardType='numeric'
             returnKeyType='next'
+            clearTextOnFocus={true}
           />
           <TextInput
+            ref="details"
             placeholder="Details"
             value={this.state.details}
             onChangeText={(details) => {
@@ -78,8 +81,14 @@ export default class AddExpense extends Component {
     if (_.isEmpty(this.state.category)) {
       ToastAndroid.show('Please select a category', ToastAndroid.SHORT);
     } else if (_.isEmpty(this.state.amount)) {
+      this.refs.amount.focus();
       ToastAndroid.show('Please enter an amount', ToastAndroid.SHORT);
+    } else if (isNaN(this.state.amount)) {
+      this.refs.amount.clear();
+      this.refs.amount.focus();
+      ToastAndroid.show('Amount should be in numbers', ToastAndroid.SHORT);
     } else if (_.isEmpty(this.state.details)) {
+      this.refs.details.focus();
       ToastAndroid.show('Please fill up the details', ToastAndroid.SHORT);
     } else {
       let data = {

@@ -24,6 +24,7 @@ export default class ExpenseManager extends Component {
   }
 
   // Render Navigator component
+  // Initially, it will render the Tabs
   render() {
     return (
       <Navigator

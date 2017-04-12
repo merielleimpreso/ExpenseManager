@@ -13,12 +13,6 @@ import moment from 'moment';
 export default class Category extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      amount: 0,
-      date: '',
-      expenses: [],
-      expensesSaved: [],
-    }
     this.onPressRow = this.onPressRow.bind(this);
   }
 

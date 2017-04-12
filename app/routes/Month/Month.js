@@ -13,12 +13,6 @@ import moment from 'moment';
 export default class Month extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      amount: 0,
-      date: 'March 2017',
-      expenses: [],
-      expensesSaved: []
-    }
     this.editCategory = this.editCategory.bind(this);
     this.getExpenses = this.getExpenses.bind(this);
     this.onPressRow = this.onPressRow.bind(this);
@@ -43,6 +37,8 @@ export default class Month extends Component {
     return Expenses.sumUpByCategory(expenses).reverse();
   }
 
+  // Return an array of expenses with date as its new category
+  // so that we can just reuse the List module
   editCategory(expenses) {
     let expensesNew = [];
     for (let i = 0; i < expenses.length; i++) {
@@ -58,6 +54,9 @@ export default class Month extends Component {
     return expensesNew;
   }
 
+  // Called when a row is clicked
+  // Get the date selected and create a new date format with that.
+  // Then, get the expenses in that particular date by passing a Date object in Expenses.getExpenses.
   onPressRow(data) {
     let dateArray = data.title.split('-');
     let nowMonth = moment(new Date()).format('YYYY-MM');

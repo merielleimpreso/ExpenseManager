@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Text, TouchableOpacity, View, StyleSheet, ToastAndroid } from 'react-native';
+import {
+  ActivityIndicator,
+  AsyncStorage,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import _ from 'underscore';
 import moment from 'moment';
 import Category from '../Category';
+import Expenses from '../../helpers/Expenses';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationBar from '../../modules/NavigationBar';
 import Month from '../Month';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import styles from './styles';
 import TabBar from '../../modules/TabBar';
 import Today from '../Today';
 
@@ -14,12 +24,14 @@ import data from '../../main/data.json';
 const TABS = ['Today', 'Category', 'Month'];
 
 export default class Tabs extends Component {
+
+  // Initial state and bind functions
   constructor(props) {
     super(props);
     this.state = {
-      categories: data['categories'],
-      expenses: data['expenses'],
-      isLoading: true,
+      categories: data['categories'], // Initially set to default categories from data.json
+      expenses: [],
+      isLoading: true, // Check if expenses are already loaded
       selectedTabIndex: 0
     }
     this.addCategory = this.addCategory.bind(this);
@@ -29,7 +41,9 @@ export default class Tabs extends Component {
   }
 
   componentDidMount() {
+    // Get the saved categories from AsyncStorage
     AsyncStorage.getItem('categories').then((result) => {
+      // If no categories is saved, assign it to the default categories.
       if (_.isEmpty(result)) {
         AsyncStorage.setItem('categories', JSON.stringify(this.state.categories));
       } else {
@@ -37,15 +51,20 @@ export default class Tabs extends Component {
           categories: JSON.parse(result)
         });
       }
+
+      // Get the saved expenses from AsyncStorage.
       AsyncStorage.getItem('expenses').then((result) => {
         if (_.isEmpty(result)) {
-          AsyncStorage.setItem('expenses', JSON.stringify(this.state.expenses));
           this.setState({
             isLoading: false
           });
         } else {
+          // Get the expenses only in the current month and saved it to AsyncStorage.
+          // This will remove the expenses of the previous month.
+          let expenses = Expenses.getExpenses(JSON.parse(result), 'MMMM YYYY');
+          AsyncStorage.setItem('expenses', JSON.stringify(expenses));
           this.setState({
-            expenses: JSON.parse(result),
+            expenses: expenses,
             isLoading: false
           });
         }
@@ -55,7 +74,7 @@ export default class Tabs extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return <View />;
+      return <ActivityIndicator color='#ccc' size='large' style={styles.activityIndicator}/>;
     }
     let title = TABS[this.state.selectedTabIndex];
     return (
@@ -105,14 +124,15 @@ export default class Tabs extends Component {
       this.props.navigator.push({
         name: 'AddExpense',
         categories: this.state.categories,
-        navigator: this.props.navigator,
-        addExpense: this.addExpense
+        addExpense: this.addExpense,
+        navigator: this.props.navigator
       });
     } else if (key == '1') {
       this.props.navigator.push({
         name: 'AddCategory',
         categories: this.state.categories,
-        addCategory: this.addCategory
+        addCategory: this.addCategory,
+        navigator: this.props.navigator,
       });
     }
   }
@@ -139,18 +159,3 @@ export default class Tabs extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  page: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  headerAction: {
-    marginRight: 10,
-    marginTop: 5,
-  },
-});

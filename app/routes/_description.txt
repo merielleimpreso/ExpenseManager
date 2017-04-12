@@ -1,0 +1,82 @@
+The routes folder contains the files that renders the pages of the app.
+
+Tabs.js
+  - This is the initial scene rendered in the navigator from ExpenseManager.js
+  - The Tabs has three pages: Today, Category and Month.
+  - It holds the state of categories and expenses and passed it to its pages.
+  - functions:
+    * onPressAdd - decides what to do when an action button in the navigation bar is pressed.
+        The action will depend on the current tab displayed: on Today, it will go to AddExpense page,
+        on Category, it will go to AddCategory page.
+    * addCategory - adds an object to categories and updates the AsyncStorage
+    * addExpense - adds an object to expenses and updates the AsyncStorage
+
+1. Today.js
+  - This is the initial page of Tabs
+  - Displays today's date, today's total expenses and the list of today's expenses, sectioned by categories
+  - props:
+    * expenses - array of all expenses
+    * categories - array of all categories
+
+1.1 AddExpense
+  - Displayed if the + button is clicked from Today page
+  - A form that ask the user to add an expense
+  - props:
+    * addExpense - passed from Tabs.js, executed after form checking
+    * categories - array of categories
+  - functions
+    * onPressCheck - called when the check button is clicked.
+        It checks if the fields are filled in correctly.
+    * goToCategorySelection - called when the category field is selected.
+        It navigates the app to SelectCategory page.
+    * setCategory - passed as transitioning in SelectCategory.
+        It sets the value of category selected.
+
+1.1.1. SelectCategory
+  - Displayed if the Category input box is clicked from AddExpense page
+  - Display a list of categories
+  - props:
+    - setCategory - called the setCategory from AddExpense when a row is pressed
+
+2. Category
+  - Second page of Tabs
+  - Displays the current month, total expenses for the month and a sum up list of expenses by category
+  - props:
+    * expenses - array of all expenses
+    * categories - array of all categories
+  - functions:
+    * onPressRow - called when a row is clicked. It navigates the app to CategoryDetails page.
+
+2.1 CategoryDetails
+  - Displayed if a row in Category page is clicked.
+  - Displays the list of expenses in a specific category, sectioned by date.
+  - props:
+    * title - string of a category
+    * total - string of the total amount of that category
+    * items - array of expenses in that category
+
+2.2 AddCategory
+  - Displayed if the + button is clicked from Category page
+  - A form that ask the user to add a category
+  - props:
+    * addCategory - passed from Tabs.js, executed after form checking
+    * categories - array of categories
+  - functions:
+    * onPressCheck - called when the check button is clicked.
+        It checks if the category field is filled in correctly.
+
+3. Month
+  - Third page of Tabs
+  - Displays the current month, total expenses for the month and a sum up list of expenses by date
+  - props:
+    * expenses - array of all expenses
+  - functions:
+    * onPressRow - called when a row is clicked. It navigates the app to MonthDetails page.
+
+3.1 MonthDetails
+  - Displayed if a row in Month page is clicked.
+  - Displays the list of expenses in a specific category, sectioned by category.
+  - props:
+    * title - string of a date
+    * total - string of the total amount of that date
+    * items - array of expenses in that date

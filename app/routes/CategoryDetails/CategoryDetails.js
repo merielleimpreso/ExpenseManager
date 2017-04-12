@@ -15,6 +15,9 @@ export default class CategoryDetails extends Component {
     }
   }
 
+  // Called once as the component will be mounted, before the render scene.
+  // Update the array of expenses with date as its new category
+  // so that we can just reuse the ListWithSection module
   componentWillMount() {
     let expenses = this.props.expenses;
     let expensesNew = [];
