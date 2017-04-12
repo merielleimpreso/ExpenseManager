@@ -1,8 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+// ExpenseManager.js
+// main file for this app
+// used in index.ios.js and index.android.js
 
 import React, { Component } from 'react';
 import {
@@ -22,12 +20,14 @@ let navigator;
 
 export default class ExpenseManager extends Component {
 
+  // Bind functions
   constructor(props) {
     super(props);
     this.renderScene = this.renderScene.bind(this);
     this.configureScene = this.configureScene.bind(this);
   }
 
+  // Render Navigator component
   render() {
     return (
       <Navigator
@@ -39,6 +39,7 @@ export default class ExpenseManager extends Component {
     );
   }
 
+  // Configure transitions on scene
   configureScene(route, routeStack) {
     switch (route.name) {
       case 'AddCategory':
@@ -52,6 +53,7 @@ export default class ExpenseManager extends Component {
     }
   }
 
+  // Render scenes according to name
   renderScene(route, navigator) {
     switch (route.name) {
       case 'AddCategory':
@@ -72,6 +74,7 @@ export default class ExpenseManager extends Component {
   }
 }
 
+// For pressing back on Android devices
 BackAndroid.addEventListener('hardwareBackPress', () => {
   var currentRoutes = navigator.getCurrentRoutes();
   if (currentRoutes.length > 1) {
