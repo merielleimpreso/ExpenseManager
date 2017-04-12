@@ -1,0 +1,7 @@
+The helpers folder includes files that serves as helpers.
+
+Expenses.js
+  - computation of expenses objects
+
+Strings.js
+  - string manipulation

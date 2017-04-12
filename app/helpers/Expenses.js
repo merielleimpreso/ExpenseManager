@@ -1,8 +1,15 @@
+// Expenses.js
+// computation of expenses objects
+
 import _ from 'underscore';
 import moment from 'moment';
 
 let Expenses = {};
 
+// Returns an array of expenses
+// allExpenses: an array of expenses to be sorted out
+// dateFormat: string format of date, used: 'DD MMMM YYYY, dddd' for day, 'MMMM YYYY' for month
+// date: if specified, it is the date that will be used
 Expenses.getExpenses = (allExpenses, dateFormat, date) => {
   let dateToUse = (date) ? new Date(date) : new Date();
   allExpenses = _.sortBy(allExpenses, 'date').reverse();
@@ -19,6 +26,9 @@ Expenses.getExpenses = (allExpenses, dateFormat, date) => {
   return expenses;
 };
 
+// Returns an array of title-detail objects
+// title = category (could be an expense's category or date)
+// detail = sum of expenses in a category
 Expenses.sumUpByCategory = (expenses) => {
   let expensesCategory = [];
   let categories = _.unique(_.pluck(expenses, 'category')).sort();
@@ -37,6 +47,7 @@ Expenses.sumUpByCategory = (expenses) => {
   return expensesCategory;
 }
 
+// Returns the total amount of an array of expenses
 Expenses.computeAmount = (expenses) => {
   let amount = 0;
   for (let i = 0; i < expenses.length; i++) {
