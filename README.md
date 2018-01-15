@@ -1,5 +1,5 @@
 # ExpenseManager
-This is a simple mobile application that manages expenses, an activity for my CMSC197 Mobile Application Development Class.
+This is a simple React Native mobile application that manages expenses, an activity for my CMSC197 Mobile Application Development Class.
 
 FUNCTIONALITIES - The app has three tabs:
 1. Today
